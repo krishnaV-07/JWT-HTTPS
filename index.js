@@ -30,10 +30,8 @@ app.get("/", (req, res) => {
 });
 app.post("/login", (req, res) => {
   const payload = {
-    jti: 12345,
-    iat: 1639608035,
-    name: "krishna v",
-    email: "krishnv@geekyants.com",
+    name: req.body.name,
+    email: req.body.email,
   };
   const tokenOptions = {
     expiresIn: "300s",
