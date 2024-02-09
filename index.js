@@ -1,10 +1,16 @@
 const express = require("express");
 const https = require("https");
 const path = require("path");
+const cors = require("cors");
 const fs = require("fs");
 const jwt = require("jsonwebtoken");
 
 const app = express();
+
+app.use(cors());
+app.use(express.json());
+
+const PORT = 3000;
 
 const sslServer = https.createServer(
   {
@@ -44,8 +50,8 @@ app.post("/login", (req, res) => {
   });
 });
 
-sslServer.listen(3000, () => {
+sslServer.listen(PORT, () => {
   console.log(
-    "app is running at secure server on port  https://localhost:3000/"
+    `app is running at secure server on port  https://localhost:${PORT}/`
   );
 });
