@@ -29,12 +29,16 @@ app.get("/", (req, res) => {
   res.send("welcome!");
 });
 app.post("/getUser", (req, res, next) => {
-  const token = req.body.token;
+  const token = req.body;
   const verify = jwt.verify(token, SECRET);
   console.log(verify);
-  res.json({
-    ...verify,
+  // res.json({
+  //   ...verify,
+  // });
+  res.send({
+    jwt: token,
   });
+
   next();
 });
 app.post("/login", (req, res) => {
@@ -52,7 +56,7 @@ app.post("/login", (req, res) => {
       res.status(500).json({ error: "Failed to generate token" });
     } else {
       res.json({
-        token: token,
+        jwt: token,
       });
     }
   });
