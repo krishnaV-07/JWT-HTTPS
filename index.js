@@ -29,9 +29,9 @@ app.get("/", (req, res) => {
   res.send("welcome!");
 });
 app.post("/getUser", (req, res, next) => {
-  const token = req.body.token;
+  const token = req.body;
   // const verify = jwt.verify(token, SECRET);
-  // console.log(verify);
+  console.log(token);
   // res.json({
   //   ...verify,
   // });
