@@ -16,9 +16,10 @@ const sslServer = https.createServer(
 const KEY_ID = "AnMWG3wu6M1J3hPYYqSaZZSM33kPpeLg6VxEK2PM9bWXO8lF";
 const SECRET = "AnMWG3wu6M1J3hPYYqSaZZSM33kPpeLg6VxEK2PM9bWXO8lF";
 app.get("/", (req, res) => {
-  res.json({
-    message: "message from ssl",
-  });
+  // res.json({
+  //   message: "message from ssl",
+  // });
+  res.send("welcome!");
 });
 app.post("/login", (req, res) => {
   const payload = {
