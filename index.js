@@ -13,13 +13,13 @@ app.use(express.urlencoded({ extended: true }));
 
 const PORT = 3000;
 
-const sslServer = https.createServer(
-  {
-    key: fs.readFileSync(path.join(__dirname, "cert", "key.pem")),
-    cert: fs.readFileSync(path.join(__dirname, "cert", "cert.pem")),
-  },
-  app
-);
+// const sslServer = https.createServer(
+//   {
+//     key: fs.readFileSync(path.join(__dirname, "cert", "key.pem")),
+//     cert: fs.readFileSync(path.join(__dirname, "cert", "cert.pem")),
+//   },
+//   app
+// );
 const KEY_ID = "AnMWG3wu6M1J3hPYYqSaZZSM33kPpeLg6VxEK2PM9bWXO8lF";
 const SECRET = "AnMWG3wu6M1J3hPYYqSaZZSM33kPpeLg6VxEK2PM9bWXO8lF";
 app.get("/", (req, res) => {
@@ -51,7 +51,7 @@ app.post("/login", (req, res) => {
   });
 });
 
-sslServer.listen(PORT, () => {
+app.listen(PORT, () => {
   console.log(
     `app is running at secure server on port  https://localhost:${PORT}/`
   );
