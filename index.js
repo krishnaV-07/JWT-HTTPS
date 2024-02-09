@@ -20,8 +20,8 @@ const PORT = 3000;
 //   },
 //   app
 // );
-const KEY_ID = "AnMWG3wu6M1J3hPYYqSaZZSM33kPpeLg6VxEK2PM9bWXO8lF";
-const SECRET = "AnMWG3wu6M1J3hPYYqSaZZSM33kPpeLg6VxEK2PM9bWXO8lF";
+const KEY_ID = "raGCpcSodps541NYm0wYdG3wHfQw6OTuxTGYMbc30v3CcKh3";
+const SECRET = "raGCpcSodps541NYm0wYdG3wHfQw6OTuxTGYMbc30v3CcKh3";
 app.get("/", (req, res) => {
   // res.json({
   //   message: "message from ssl",
