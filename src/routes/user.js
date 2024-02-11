@@ -117,7 +117,6 @@ router.post("/zendesk", async (req, res) => {
     };
     const token = await jwt.sign(payload, process.env.JWT_SECRET, tokenOptions);
     res.status(200).json({
-      ...payload,
       jwt: token,
     });
   } catch (error) {
