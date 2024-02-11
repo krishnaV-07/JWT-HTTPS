@@ -100,8 +100,8 @@ router.post("/login", async (req, res) => {
 
 router.post("/zendesk", async (req, res) => {
   try {
-    const { email } = req.body;
-    const user = await User.findOne({ email }).exec();
+    const { user_token } = req.body;
+    const user = await User.findOne({ email: user_token }).exec();
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
