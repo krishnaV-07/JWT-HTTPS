@@ -76,6 +76,35 @@ router.post("/login", async (req, res) => {
       return res.status(401).json({ error: "Invalid password" });
     }
 
+    // const payload = {
+    //   name: user.name,
+    //   email: user.email,
+    //   jti: uuidv4(),
+    //   iat: Math.floor(Date.now() / 1000),
+    // };
+    // const tokenOptions = {
+    //   expiresIn: "300s",
+    //   header: { kid: process.env.KEY_ID },
+    // };
+
+    // const token = await jwt.sign(payload, process.env.JWT_SECRET, tokenOptions);
+
+    res.status(200).json({
+      user,
+    });
+  } catch (error) {
+    console.error("Error during login:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+router.post("/zendesk", async (req, res) => {
+  try {
+    const { email } = req.body;
+    const user = await User.findOne({ email }).exec();
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
     const payload = {
       name: user.name,
       email: user.email,
@@ -86,9 +115,7 @@ router.post("/login", async (req, res) => {
       expiresIn: "300s",
       header: { kid: process.env.KEY_ID },
     };
-
     const token = await jwt.sign(payload, process.env.JWT_SECRET, tokenOptions);
-
     res.status(200).json({
       ...payload,
       jwt: token,
@@ -98,5 +125,4 @@ router.post("/login", async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 });
-
 module.exports = router;
