@@ -32,13 +32,13 @@ router.post("/signup", async (req, res) => {
     const user = new User({
       _id: new mongoose.Types.ObjectId(),
       name: req.body.name,
-      email: req.body.email,
+      email: req.body.email.toLowerCase(),
       password: hashedPassword,
     });
 
     const payload = {
       name: req.body.name,
-      email: req.body.email,
+      email: req.body.email.toLowerCase(),
       jti: uuidv4(),
       iat: Math.floor(Date.now() / 1000),
     };
@@ -66,7 +66,7 @@ router.post("/login", async (req, res) => {
     const { email, password } = req.body;
     console.log({ email, password });
 
-    const user = await User.findOne({ email }).exec();
+    const user = await User.findOne({ email: email.toLowerCase() }).exec();
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
@@ -78,7 +78,7 @@ router.post("/login", async (req, res) => {
 
     const payload = {
       name: user.name,
-      email: user.email,
+      email: user.email.toLowerCase(),
       jti: uuidv4(),
       iat: Math.floor(Date.now() / 1000),
     };
@@ -102,13 +102,13 @@ router.post("/login", async (req, res) => {
 router.post("/zendesk", async (req, res) => {
   try {
     const { user_token } = req.body;
-    const user = await User.findOne({ email: user_token }).exec();
+    const user = await User.findOne({ email: user_token.toLowerCase() }).exec();
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
     const payload = {
       name: user.name,
-      email: user.email,
+      email: user.email.toLowerCase(),
       jti: uuidv4(),
       iat: Math.floor(Date.now() / 1000),
     };
